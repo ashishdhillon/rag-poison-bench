@@ -1,7 +1,11 @@
 import tempfile
+import sys
 import unittest
 import zlib
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
 from rag_poison_bench.pdf_scanner import extract_text_from_pdf_stream, scan_pdf_file
 
 

@@ -1,4 +1,9 @@
 import unittest
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
 from rag_poison_bench.engine import ScanEngine
 from rag_poison_bench.detectors.base import Severity, ThreatCategory
 

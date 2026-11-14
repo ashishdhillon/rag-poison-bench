@@ -3,6 +3,9 @@ import sys
 import unittest
 import tempfile
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
 from rag_poison_bench.cli import main
 
 

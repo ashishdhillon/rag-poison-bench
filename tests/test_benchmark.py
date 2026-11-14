@@ -1,4 +1,9 @@
 import unittest
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
 from rag_poison_bench.benchmark import BenchmarkRunner, format_markdown, format_table
 from rag_poison_bench.html_report import generate_html_report
 
