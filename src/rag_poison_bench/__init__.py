@@ -9,6 +9,7 @@ from .detectors.base import (
 from .engine import ScanEngine, ScanResult
 from .sanitizer import Sanitizer
 from .benchmark import BenchmarkRunner, MetricSummary
+from .html_report import generate_html_report
 from .data.benchmark_dataset import BenchmarkSample, load_benchmark_dataset
 
 __version__ = "0.1.0"
@@ -23,6 +24,7 @@ __all__ = [
     "Sanitizer",
     "BenchmarkRunner",
     "MetricSummary",
+    "generate_html_report",
     "BenchmarkSample",
     "load_benchmark_dataset",
 ]

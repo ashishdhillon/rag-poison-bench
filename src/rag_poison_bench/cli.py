@@ -9,6 +9,7 @@ from typing import Sequence
 
 from .benchmark import BenchmarkRunner, format_markdown, format_table
 from .engine import ScanEngine
+from .html_report import generate_html_report
 from .sanitizer import Sanitizer
 
 
@@ -28,7 +29,8 @@ def build_parser() -> argparse.ArgumentParser:
     # bench
     bench_parser = subparsers.add_parser("bench", help="Run the indirect prompt injection evaluation benchmark")
     bench_parser.add_argument("--bootstrap", type=int, default=1000, help="Number of bootstrap iterations for 95%% CI (default: 1000)")
-    bench_parser.add_argument("--format", choices=["table", "markdown", "json"], default="table", help="Output format")
+    bench_parser.add_argument("--format", choices=["table", "markdown", "json", "html"], default="table", help="Output format")
+    bench_parser.add_argument("-o", "--output", help="Save benchmark report to file")
 
     # sanitize
     san_parser = subparsers.add_parser("sanitize", help="Neutralize and defang prompt injection payloads in a file")
@@ -110,12 +112,20 @@ def handle_bench(args: argparse.Namespace) -> int:
     runner = BenchmarkRunner()
     summary = runner.run(bootstrap_iterations=args.bootstrap)
 
-    if args.format == "json":
-        print(json.dumps(summary.to_dict(), indent=2))
+    if args.format == "html":
+        out = generate_html_report(summary, runner.last_results)
+    elif args.format == "json":
+        out = json.dumps(summary.to_dict(), indent=2)
     elif args.format == "markdown":
-        print(format_markdown(summary))
+        out = format_markdown(summary)
     else:
-        print(format_table(summary))
+        out = format_table(summary)
+
+    if args.output:
+        Path(args.output).write_text(out, encoding="utf-8")
+        print(f"Benchmark report written to {args.output}")
+    else:
+        print(out)
     return 0
 
 

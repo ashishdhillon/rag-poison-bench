@@ -1,5 +1,6 @@
 import unittest
 from rag_poison_bench.benchmark import BenchmarkRunner, format_markdown, format_table
+from rag_poison_bench.html_report import generate_html_report
 
 
 class TestBenchmark(unittest.TestCase):
@@ -21,6 +22,11 @@ class TestBenchmark(unittest.TestCase):
 
         md = format_markdown(summary)
         self.assertIn("RAG Poison Bench Evaluation Results", md)
+
+        html_out = generate_html_report(summary, runner.last_results)
+        self.assertIn("<!DOCTYPE html>", html_out)
+        self.assertIn("RAG Poison Bench - Visual Evaluation Report", html_out)
+        self.assertIn("Attack Vector Coverage", html_out)
 
         d = summary.to_dict()
         self.assertIn("confusion_matrix", d)

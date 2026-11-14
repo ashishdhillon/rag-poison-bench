@@ -66,6 +66,7 @@ class BenchmarkRunner:
 
     def __init__(self, engine: Optional[ScanEngine] = None):
         self.engine = engine or ScanEngine()
+        self.last_results: List[Tuple[BenchmarkSample, ScanResult]] = []
 
     def run(
         self,
@@ -83,6 +84,8 @@ class BenchmarkRunner:
             total_bytes += len(sample.text.encode("utf-8"))
             scan_res = self.engine.scan(sample.text)
             results.append((sample, scan_res))
+
+        self.last_results = results
 
         elapsed = time.perf_counter() - t0
         elapsed = max(elapsed, 1e-6)
