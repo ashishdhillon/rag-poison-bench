@@ -6,7 +6,7 @@ from .base import BaseDetector, DetectionFinding, Severity, ThreatCategory
 # Compiled patterns representing common indirect prompt injection vectors
 INSTRUCTION_PATTERNS = [
     (
-        r"(?i)\b(?:ignore|disregard|forget|bypass)\s+(?:all\s+)?(?:(?:previous|prior|above|existing|earlier)\s+)?(?:instructions|prompts|directives|rules|constraints|context)\b",
+        r"(?i)\b(?:ignore|disregard|forget|bypass|override)\s+(?:all\s+)?(?:(?:previous|prior|above|existing|earlier)\s+)?(?:instructions|prompts|directives|rules|constraints|context)\b",
         Severity.CRITICAL,
         "Direct instruction cancellation ('ignore previous instructions')",
     ),
