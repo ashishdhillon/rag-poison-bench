@@ -174,6 +174,19 @@ Deep inspection of an individual text chunk with character offset spans and reme
 
 ---
 
+## Academic References
+
+This project builds on peer-reviewed research in indirect prompt injection and statistical benchmark estimation:
+- **Greshake et al. (ACM CCS/AISec 2023)**: *Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection*
+- **Wei et al. (NeurIPS 2023)**: *Jailbroken: How Does LLM Safety Training Fail?*
+- **Zou et al. (2023)**: *Universal and Transferable Adversarial Attacks on Aligned Language Models*
+- **Efron (Annals of Statistics 1979)**: *Bootstrap Methods: Another Look at the Jackknife*
+- **OWASP GenAI Top 10**: *LLM01: Prompt Injection*
+
+For complete BibTeX citations and methodology links, see [REFERENCES.md](REFERENCES.md).
+
+---
+
 ## License
 
 MIT © [Ashish Dhillon](https://github.com/ashishdhillon)
