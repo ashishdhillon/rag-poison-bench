@@ -10,6 +10,7 @@ from typing import Sequence
 from .benchmark import BenchmarkRunner, format_markdown, format_table
 from .engine import ScanEngine
 from .html_report import generate_html_report
+from .pdf_scanner import extract_text_from_pdf_stream, scan_pdf_file
 from .sanitizer import Sanitizer
 
 
@@ -69,7 +70,7 @@ def handle_scan(args: argparse.Namespace) -> int:
     if p.is_file():
         files_to_scan.append(p)
     else:
-        for ext in ("*.txt", "*.md", "*.markdown", "*.json", "*.html"):
+        for ext in ("*.txt", "*.md", "*.markdown", "*.json", "*.html", "*.pdf"):
             files_to_scan.extend(p.rglob(ext))
 
     if not files_to_scan:
@@ -80,11 +81,18 @@ def handle_scan(args: argparse.Namespace) -> int:
     all_results = []
 
     for file_path in files_to_scan:
-        try:
-            content = file_path.read_text(encoding="utf-8", errors="replace")
-        except Exception as e:
-            print(f"Failed to read {file_path}: {e}", file=sys.stderr)
-            continue
+        if file_path.suffix.lower() == ".pdf":
+            try:
+                content = extract_text_from_pdf_stream(file_path.read_bytes())
+            except Exception as e:
+                print(f"Failed to read PDF {file_path}: {e}", file=sys.stderr)
+                continue
+        else:
+            try:
+                content = file_path.read_text(encoding="utf-8", errors="replace")
+            except Exception as e:
+                print(f"Failed to read {file_path}: {e}", file=sys.stderr)
+                continue
 
         res = engine.scan(content)
         if res.is_poisoned:
