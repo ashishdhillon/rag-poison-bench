@@ -1,6 +1,7 @@
 # rag-poison-bench
 
 [![CI](https://github.com/ashishdhillon/rag-poison-bench/actions/workflows/ci.yml/badge.svg)](https://github.com/ashishdhillon/rag-poison-bench/actions/workflows/ci.yml)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Interactive_Scanner-ef4444?style=flat&logo=googlechrome&logoColor=white)](https://ashishdhillon.github.io/rag-poison-bench/)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen.svg)](pyproject.toml)
